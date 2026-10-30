@@ -1,0 +1,84 @@
+
+{% extends "base.html" %}
+
+{% block title %}Marks Management{% endblock %}
+
+{% block content %}
+
+<h1>Marks Management</h1>
+<p>Assign and manage student marks.</p>
+
+<div class="card" style="margin: 20px 0;">
+    <h2>Assign Marks</h2>
+
+    <form id="marksForm">
+
+        <label for="studentId">Select Student</label>
+        <select id="studentId" required>
+            <option value="">Loading students...</option>
+        </select>
+
+        <label for="subjectId">Select Subject</label>
+        <select id="subjectId" required>
+            <option value="">Loading subjects...</option>
+        </select>
+
+        <label for="score">Enter Marks</label>
+        <input type="number" id="score"
+               min="0" step="any"
+               placeholder="Enter obtained marks" required>
+
+        <p id="marksLimit"></p>
+
+        <button type="submit">Assign Marks</button>
+
+    </form>
+
+    <p id="marksMessage"></p>
+</div>
+
+<h2>Marks Records</h2>
+
+<!-- FILTER SECTION -->
+<div class="card" style="margin: 15px 0;">
+    <h3>Filter Marks</h3>
+
+    <label for="studentFilter">Filter by Student</label>
+    <select id="studentFilter">
+        <option value="">All Students</option>
+    </select>
+
+    <label for="subjectFilter">Filter by Subject</label>
+    <select id="subjectFilter">
+        <option value="">All Subjects</option>
+    </select>
+</div>
+
+<!-- MARKS TABLE -->
+<div class="table-container">
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Student</th>
+                <th>Subject</th>
+                <th>Score</th>
+                <th>Maximum Marks</th>
+                <th>Pass Marks</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+
+        <tbody id="marksTable">
+            <tr>
+                <td colspan="7">Loading marks...</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/marks.js') }}" defer></script>
+{% endblock %}

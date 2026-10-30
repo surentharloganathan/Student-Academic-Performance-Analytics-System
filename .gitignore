@@ -1,0 +1,18 @@
+
+# Virtual environments
+venv/
+venv-spark/
+
+# Environment variables
+.env
+
+# Python cache
+__pycache__/
+*.py[cod]
+
+# IDE settings
+.vscode/
+
+# Spark temporary files
+spark-warehouse/
+metastore_db/

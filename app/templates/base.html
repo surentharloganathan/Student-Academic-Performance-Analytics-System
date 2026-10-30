@@ -1,0 +1,62 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{% block title %}Student Analytics{% endblock %}</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+    {% block extra_css %}{% endblock %}
+</head>
+
+<body>
+
+<div class="app-layout">
+
+   <aside class="sidebar">
+
+    <h2 class="sidebar-title">Student Analytics</h2>
+
+    <nav class="sidebar-nav">
+
+        <a href="{{ url_for('dashboard.dashboard_home') }}"
+           class="{% if request.endpoint == 'dashboard.dashboard_home' %}active{% endif %}">
+            Dashboard
+        </a>
+
+        <a href="{{ url_for('dashboard.students_page') }}"
+           class="{% if request.endpoint == 'dashboard.students_page' %}active{% endif %}">
+            Students
+        </a>
+
+        <a href="{{ url_for('dashboard.subjects_page') }}"
+           class="{% if request.endpoint == 'dashboard.subjects_page' %}active{% endif %}">
+            Subjects
+        </a>
+
+        <a href="{{ url_for('dashboard.marks_page') }}"
+           class="{% if request.endpoint == 'dashboard.marks_page' %}active{% endif %}">
+            Manage Marks
+        </a>
+
+    </nav>
+
+    <div class="sidebar-footer">
+        Academic Performance System
+    </div>
+
+</aside>
+    <main class="main-content">
+        {% block content %}{% endblock %}
+    </main>
+
+</div>
+
+{% block scripts %}{% endblock %}
+
+</body>
+</html>

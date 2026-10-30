@@ -1,0 +1,99 @@
+
+{% extends "base.html" %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block extra_css %}
+<script id="student-chart-data" type="application/json">{{ student_chart_data | safe }}</script>
+<script id="subject-chart-data" type="application/json">{{ subject_chart_data | safe }}</script>
+{% endblock %}
+
+{% block content %}
+
+<h1>Student Academic Performance Dashboard</h1>
+
+<div class="overview">
+    <div class="card">
+        <h3>Total Students</h3>
+        <p>{{ total_students }}</p>
+    </div>
+
+    <div class="card">
+        <h3>Subjects With Recorded Marks</h3>
+        <p>{{ total_subjects }}</p>
+    </div>
+
+    <div class="card">
+        <h3>Overall Pass Percentage</h3>
+        <p>{{ overall_pass_percentage }}%</p>
+    </div>
+</div>
+
+<div class="charts-container">
+    <div class="chart-card">
+        <h2>Student Percentage Chart</h2>
+        <canvas id="studentChart"></canvas>
+    </div>
+
+    <div class="chart-card">
+        <h2>Subject Pass Percentage</h2>
+        <canvas id="subjectChart"></canvas>
+    </div>
+</div>
+
+<div class="table-container">
+    <h2>Student Performance</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Register Number</th>
+                <th>Total Marks</th>
+                <th>Average</th>
+                <th>Percentage</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for student in students %}
+            <tr>
+                <td>{{ student.student_name }}</td>
+                <td>{{ student.register_number }}</td>
+                <td>{{ student.total_marks }} / {{ student.total_max_marks }}</td>
+                <td>{{ student.average_marks }}</td>
+                <td>{{ student.percentage }}%</td>
+                <td>{{ student.status }}</td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="6">No student marks available yet.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<div class="weak-subjects">
+    <h2>Weak Subjects</h2>
+
+    <ul>
+        {% for subject in weak_subjects %}
+        <li>
+            {{ subject.subject_name }} —
+            Average: {{ subject.average_percentage }}%,
+            Pass percentage: {{ subject.pass_percentage }}%
+        </li>
+        {% else %}
+        <li>No weak subjects identified.</li>
+        {% endfor %}
+    </ul>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+{% endblock %}

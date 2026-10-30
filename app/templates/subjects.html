@@ -1,0 +1,59 @@
+
+{% extends "base.html" %}
+
+{% block title %}Subjects Management{% endblock %}
+
+{% block content %}
+
+<h1>Subjects Management</h1>
+<p>Manage subjects and their marks configuration.</p>
+
+<div class="card" style="margin: 20px 0;">
+    <h2>Add New Subject</h2>
+
+    <form id="subjectForm">
+        <label>Subject Name</label>
+        <input type="text" id="subjectName"
+               placeholder="Enter subject name" required>
+
+        <label>Maximum Marks</label>
+        <input type="number" id="maxMarks"
+               value="100" min="0" max="100" required>
+
+        <label>Pass Marks</label>
+        <input type="number" id="passMark"
+               value="40" min="0" required>
+
+        <button type="submit">Add Subject</button>
+    </form>
+
+    <p id="subjectMessage"></p>
+</div>
+
+<h2>Subject Records</h2>
+
+<div class="table-container">
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Subject Name</th>
+                <th>Maximum Marks</th>
+                <th>Pass Marks</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+
+        <tbody id="subjectTable">
+            <tr>
+                <td colspan="5">Loading subjects...</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/subjects.js') }}" defer ></script>
+{% endblock %}
